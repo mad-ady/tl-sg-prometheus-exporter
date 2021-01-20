@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus Exporter for TPLink TL-SG switches
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/tl-sg-prometheus-exporter.py --config /etc/tl-sg-prometheus-exporter.yaml 
+SyslogIdentifier=tl-sg-prometheus-exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

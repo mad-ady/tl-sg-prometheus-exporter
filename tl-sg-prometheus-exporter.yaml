@@ -1,0 +1,18 @@
+http_port: 8000
+switch:
+  - ip: 1.2.3.4
+    username: admin
+    password: '1234'
+    cache_login: False
+    http_port: 80
+    port_descriptions:
+     '1': "Uplink to router"
+     '2': "Downlink to second switch"
+     '3': "Link to the Kitchen"
+     '4': "Link to TV"
+     '5': "Link to PC"
+  - ip: 5.6.7.8
+    username: admin
+    password: mySecretPassword
+    cache_login: True
+    http_port: 80
