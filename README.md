@@ -32,3 +32,8 @@ The passwords are also stored in clear-text inside the configuration file.
 When polling multiple devices, polling is done serially. For use with many devices it would be wise to rewrite the collection process and poll them in threads. PRs welcome.
 
 # Integration with Grafana
+You can use this dashboard with Grafana to display data collected by this exporter:
+https://grafana.com/grafana/dashboards/13760
+
+Here is a screenshot of the data collected
+![Grafana dashboard](screenshot.png?raw=true "Grafana dashboard")
