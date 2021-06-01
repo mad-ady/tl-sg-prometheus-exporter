@@ -10,9 +10,7 @@ RUN apt-get update && \
 
 # Install dumb-init in the build stage as the distroless image doesn't have the tools
 # to obtain it
-RUN wget -O /usr/local/bin/dumb-init \
-    https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64
-RUN chmod +x /usr/local/bin/dumb-init
+RUN /venv/bin/pip install dumb-init
 
 
 # Build the virtualenv as a separate step: Only re-execute this step when requirements.txt changes
@@ -24,7 +22,7 @@ RUN /venv/bin/pip install --disable-pip-version-check -r /requirements.txt
 # Copy the virtualenv into a distroless image
 FROM gcr.io/distroless/python3-debian10
 
-COPY --from=build /usr/local/bin/dumb-init /usr/bin/dumb-init
+COPY --from=build /venv/bin/dumb-init /usr/bin/dumb-init
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 WORKDIR /app
