@@ -26,6 +26,16 @@ sudo systemctl start tl-sg-prometheus-exporter
 sudo journalctl -f -u tl-sg-prometheus-exporter
 ```
 
+# Docker
+A Docker image is provided. You can run it with a command like:
+```
+docker run -it -p 8000:8000 -v /path/to/tl-sg-prometheus-exporter.yaml:/app/config.yaml ghcr.io/mad-ady/tl-sg-prometheus-exporter:main
+```
+
+Where `/path/to/tl-sg-prometheus-exporter.yaml` is the location of your configuration YAML file.
+
+The container image is currently built for AMD64 and ARM64 architectures.
+
 # Security and future improvements
 Traffic to the switches uses plain HTTP. The password is also sent in clear-text (as a HTTP POST request). When `cache_login: False`, the script logs in each time it needs to get the metrics. This is because of how the switches are designed to operate. In insecure environments consider tunneling the traffic through ssh tunnels (though traffic will still be unencrypted when it reaches the switch). 
 The passwords are also stored in clear-text inside the configuration file.
