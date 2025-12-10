@@ -4,6 +4,7 @@ Prometheus Exporter for the TPLink TL-SG10xE series switches with web management
 # Supported devices
 The code was confirmed to run correctly on:
  - TL-SG108E 2.0
+ - TL-SG1218MPE
 
 Supported firmware versions:
  - 1.0.2 Build 20160526 Rel.34615
@@ -24,6 +25,16 @@ sudo cp tl-sg-prometheus-exporter.service /etc/systemd/system
 sudo systemctl enable tl-sg-prometheus-exporter
 sudo systemctl start tl-sg-prometheus-exporter
 sudo journalctl -f -u tl-sg-prometheus-exporter
+```
+You will also need to reconfigure (and restart) prometheus, to scrape this new exporter. Something like this, assuming that the exporter runs on the same host as prometheus:
+```
+  - job_name: 'TL-SG108E'                                                                 
+    scrape_interval: 5m                                                                   
+    static_configs:                                                                       
+      - targets: ['127.0.0.1:8000']                                                     
+        labels:                                                                           
+          instance: 'TL-SG108E'                                                           
+          send_alerts: true
 ```
 
 # Docker
